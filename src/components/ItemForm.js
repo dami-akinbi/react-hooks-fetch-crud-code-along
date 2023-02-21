@@ -22,10 +22,7 @@ function ItemForm({ onAddItem }) {
       body: JSON.stringify(itemData),
     })
       .then((r) => r.json())
-      .then((data) => {
-        console.log(data);
-        onAddItem(itemData);
-      });
+      .then((newItem) => onAddItem(newItem));
   }
 
   return (

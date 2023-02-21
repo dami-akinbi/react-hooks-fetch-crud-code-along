@@ -16,6 +16,12 @@ function ShoppingList() {
       });
   }, []);
 
+  function handleDeleteItem(deleteItem) {
+    // console.log("In ShoppingCart:", deleteItem);
+    const updatedItems = items.filter((item) => item.id !== deleteItem.id);
+    setItems(updatedItems);
+  }
+
   function handleUpdateItem(updatedItem) {
     // console.log("In ShoppingCart:", updatedItem);
     const updatedItems = items.map((item) => {
@@ -46,11 +52,18 @@ function ShoppingList() {
         category={selectedCategory}
         onCategoryChange={handleCategoryChange}
       />
-      <ul className="Items">
-        {itemsToDisplay.map((item) => (
-          <Item key={item.id} item={item} onUpdateItem={handleUpdateItem} />
-        ))}
-      </ul>
+      <div>
+        <ul className="Items">
+          {itemsToDisplay.map((item) => (
+            <Item
+              key={item.id}
+              item={item}
+              onUpdateItem={handleUpdateItem}
+              onDeleteItem={handleDeleteItem}
+            />
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

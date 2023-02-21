@@ -12,9 +12,14 @@ function ShoppingList() {
       .then((r) => r.json())
       .then((data) => {
         // console.log(data);
-        setItems(data)
+        setItems(data);
       });
   }, []);
+
+  function handleAddItem(newItem) {
+    // console.log("In ShoppingList:", newItem)
+    setItems([...items, newItem]);
+  }
 
   function handleCategoryChange(category) {
     setSelectedCategory(category);
@@ -22,13 +27,12 @@ function ShoppingList() {
 
   const itemsToDisplay = items.filter((item) => {
     if (selectedCategory === "All") return true;
-
     return item.category === selectedCategory;
   });
 
   return (
     <div className="ShoppingList">
-      <ItemForm />
+      <ItemForm onAddItem={handleAddItem} />
       <Filter
         category={selectedCategory}
         onCategoryChange={handleCategoryChange}
